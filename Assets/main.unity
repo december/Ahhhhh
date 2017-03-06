@@ -3237,7 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5003c73b293984cbccba79f0886d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSum: 1
+  maxSum: 0.2
   currentVolume: 0
 --- !u!4 &2145910672
 Transform:

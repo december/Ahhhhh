@@ -59,14 +59,14 @@ public class Player : MonoBehaviour {
 
     public void TakeDamage(int damage)
     {
-		anim.SetTrigger("Hurt");
+		//anim.SetTrigger("Hurt");
         HP -= damage;
         UIManager.instance.UpdateHP(Mathf.Max(0, HP), who);
         if (HP <= 0)
         {
             anim.SetTrigger("Die");
         }
-        //else
-        //   anim.SetTrigger("Hurt");
+        else
+           anim.SetTrigger("Hurt");
     }
 }

@@ -7,13 +7,17 @@ using UnityEngine;
 public class Stuff : MonoBehaviour {
     [SerializeField]
     private int damage;
+	private bool hurt = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-			Destroy(gameObject);
-            other.gameObject.GetComponent<Player>().TakeDamage(damage);
+			//Destroy(gameObject);
+			if (!hurt) {
+				other.gameObject.GetComponent<Player> ().TakeDamage (damage);
+				hurt = true;
+			}
 
         }
 

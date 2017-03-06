@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void StartGame()
     {
-		int r = Random.Range (0, 1);
+		int r = Random.Range (0, 2);
 		if (r == 0)
 			fsm.ChangeState (States.Left);
 		else

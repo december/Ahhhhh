@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
     private Animator anim;
 	private float myForce;
 	private Stuffs myStuff;
+	private int damage;
     public int HP = 10;
     public GameObject shitPrefab;
     public GameObject fishPrefab;
@@ -37,13 +38,29 @@ public class Player : MonoBehaviour {
 		GameObject stuffPrefab;
 		switch (myStuff)
 		{
-		case Stuffs.Ball: stuffPrefab = ballPrefab; break;
-		case Stuffs.Fish: stuffPrefab = fishPrefab; break;
-		case Stuffs.Sword: stuffPrefab = swordPrefab; break;
-		case Stuffs.Shit: stuffPrefab = shitPrefab; break;
+		case Stuffs.Ball: 
+			stuffPrefab = ballPrefab; 
+			damage = 1;
+			break;
+		case Stuffs.Fish: 
+			damage = -1;
+			stuffPrefab = fishPrefab; 
+			break;
+		case Stuffs.Sword: 
+			damage = 2;
+			stuffPrefab = swordPrefab; 
+			break;
+		case Stuffs.Shit: 
+			stuffPrefab = shitPrefab; 
+			int rankey = Random.Range (0, 3);
+			damage = 3;
+			Debug.Log (rankey);
+			if (rankey == 0)
+				damage = -2;
+			break;
 		default: stuffPrefab = null; break;
 		}
-
+		Debug.Log (damage);
 		Instantiate<GameObject>(stuffPrefab, thrower.transform.position, Quaternion.identity)
 			.GetComponent<Rigidbody2D>().AddForce(direction * ((myForce + 0.1f) / 1.1f * forceMultiplier));
 	}
@@ -57,11 +74,12 @@ public class Player : MonoBehaviour {
         anim.SetTrigger("Attack");
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
 		//anim.SetTrigger("Hurt");
+		Debug.Log(damage);
         HP -= damage;
-        UIManager.instance.UpdateHP(Mathf.Max(0, HP), who);
+		UIManager.instance.UpdateHP(Mathf.Min(10, Mathf.Max(0, HP)), who);
         if (HP <= 0)
         {
             anim.SetTrigger("Die");

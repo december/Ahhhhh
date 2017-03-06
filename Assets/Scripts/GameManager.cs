@@ -20,11 +20,17 @@ public class GameManager : Singleton<GameManager> {
     private Wind wind;
 
     public float recordTime = 3f;
-    public float waitTime = 5f;
+    public float waitTime = 15f;
+
+	IEnumerator WaitSeconds()
+	{
+		yield return new WaitForSeconds (5f);
+	}
 
     public void StartGame()
     {
 		int r = Random.Range (0, 2);
+		Debug.Log (r);
 		if (r == 0)
 			fsm.ChangeState (States.Left);
 		else
@@ -45,6 +51,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void CheckRoundEnd()
     {
+		Debug.Log ("I'm check.");
         if (WangWang.HP <= 0 || XianYu.HP <= 0)
         {
             fsm.ChangeState(States.End);
@@ -91,6 +98,8 @@ public class GameManager : Singleton<GameManager> {
 
     void Left_Enter()
     {
+		if (WangWang.HP <= 0 || XianYu.HP <= 0)
+			fsm.ChangeState(States.End);
         ChangeWindDirection();
         UIManager.instance.recordButtonLeft.SetActive(true);
         /*yield return new WaitForSeconds(prepareTime);
@@ -125,6 +134,8 @@ public class GameManager : Singleton<GameManager> {
 
     void Right_Enter()
     {
+		if (WangWang.HP <= 0 || XianYu.HP <= 0)
+			fsm.ChangeState(States.End);
         ChangeWindDirection();
         UIManager.instance.recordButtonRight.SetActive(true);
         /*yield return new WaitForSeconds(prepareTime);
@@ -160,6 +171,7 @@ public class GameManager : Singleton<GameManager> {
     void End_Enter()
     {
         UIManager.instance.playingUI.SetActive(false);
-        UIManager.instance.endUI.SetActive(true);
+		StartCoroutine (WaitSeconds());
+		UIManager.instance.startUI.SetActive(true);
     }
 }

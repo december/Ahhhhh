@@ -6,8 +6,9 @@ using UnityEngine;
 /// </summary>
 public class Stuff : MonoBehaviour {
     [SerializeField]
-    private int damage;
+    //private int damage;
 	private bool hurt = false;
+	//public AudioClip hurtEffect;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -15,7 +16,9 @@ public class Stuff : MonoBehaviour {
         {
 			//Destroy(gameObject);
 			if (!hurt) {
-				other.gameObject.GetComponent<Player> ().TakeDamage (damage);
+				//GameObject
+				//AudioSource.PlayClipAtPoint (hurtEffect, other.transform.localPosition);
+				other.gameObject.GetComponent<Player> ().TakeDamage ();
 				hurt = true;
 			}
 

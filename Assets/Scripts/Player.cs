@@ -12,7 +12,8 @@ public class Player : MonoBehaviour {
     private Animator anim;
 	private float myForce;
 	private Stuffs myStuff;
-	private int damage;
+	//private int damage;
+
     public int HP = 10;
     public GameObject shitPrefab;
     public GameObject fishPrefab;
@@ -22,6 +23,9 @@ public class Player : MonoBehaviour {
     public Players who;
 
     public Transform thrower;
+	public AudioClip throwMusic;
+	public AudioClip dieMusic;
+	public AudioClip hurtMusic;
 
     public Vector2 direction = new Vector2(1f, 1f);
     public float forceMultiplier;
@@ -40,29 +44,30 @@ public class Player : MonoBehaviour {
 		{
 		case Stuffs.Ball: 
 			stuffPrefab = ballPrefab; 
-			damage = 1;
+			//damage = 1;
 			break;
 		case Stuffs.Fish: 
-			damage = -1;
+			//damage = -1;
 			stuffPrefab = fishPrefab; 
 			break;
 		case Stuffs.Sword: 
-			damage = 2;
+			//damage = 2;
 			stuffPrefab = swordPrefab; 
 			break;
 		case Stuffs.Shit: 
 			stuffPrefab = shitPrefab; 
-			int rankey = Random.Range (0, 3);
-			damage = 3;
-			Debug.Log (rankey);
-			if (rankey == 0)
-				damage = -2;
+			//int rankey = Random.Range (0, 3);
+			//damage = 3;
+			//Debug.Log (rankey);
+			//if (rankey == 0)
+			//	damage = -2;
 			break;
 		default: stuffPrefab = null; break;
 		}
-		Debug.Log (damage);
 		Instantiate<GameObject>(stuffPrefab, thrower.transform.position, Quaternion.identity)
 			.GetComponent<Rigidbody2D>().AddForce(direction * ((myForce + 0.1f) / 1.1f * forceMultiplier));
+		AudioSource.PlayClipAtPoint (throwMusic, thrower.position);
+		
 	}
 
     public void ThrowStuff(float force, Stuffs stuff)
@@ -74,17 +79,19 @@ public class Player : MonoBehaviour {
         anim.SetTrigger("Attack");
     }
 
-    public void TakeDamage()
+	public void TakeDamage(int damage)
     {
 		//anim.SetTrigger("Hurt");
-		Debug.Log(damage);
+
+		Debug.Log(myStuff);
         HP -= damage;
 		UIManager.instance.UpdateHP(Mathf.Min(10, Mathf.Max(0, HP)), who);
-        if (HP <= 0)
-        {
-            anim.SetTrigger("Die");
-        }
-        else
-           anim.SetTrigger("Hurt");
+		if (HP <= 0) {
+			AudioSource.PlayClipAtPoint (dieMusic, thrower.position);
+			anim.SetTrigger ("Die");
+		} else {
+			AudioSource.PlayClipAtPoint (hurtMusic, thrower.position);
+			anim.SetTrigger ("Hurt");
+		}
     }
 }

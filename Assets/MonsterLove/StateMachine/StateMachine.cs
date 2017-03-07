@@ -177,6 +177,7 @@ namespace MonsterLove.StateMachine
 
 		public void ChangeState(T newState)
 		{
+			Debug.Log (newState);
 			ChangeState(newState, StateTransition.Safe);
 		}
 

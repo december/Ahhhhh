@@ -31,4 +31,10 @@ public class UIManager : Singleton<UIManager> {
             playerRightHP.value = value;
         }
     }
+
+	public void ResetHP(int value)
+	{
+		playerLeftHP.value = value;
+		playerRightHP.value = value;
+	}
 }

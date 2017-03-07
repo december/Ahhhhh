@@ -29,14 +29,22 @@ public class GameManager : Singleton<GameManager> {
 
     public void StartGame()
     {
+		Debug.Log ("Started.");
+
+		UIManager.instance.ResetHP (initialHP);
+		WangWang.HP = initialHP;
+		XianYu.HP = initialHP;
 		int r = Random.Range (0, 2);
-		Debug.Log (r);
 		if (r == 0)
 			fsm.ChangeState (States.Left);
 		else
 			fsm.ChangeState (States.Right);
-        WangWang.HP = initialHP;
-        XianYu.HP = initialHP;
+		
+        
+
+		UIManager.instance.playingUI.SetActive(true);
+		UIManager.instance.startUI.SetActive(false);
+		Debug.Log (fsm.State);
     }
 
     public void ExitGame()
@@ -52,6 +60,7 @@ public class GameManager : Singleton<GameManager> {
     public void CheckRoundEnd()
     {
 		Debug.Log ("I'm check.");
+		Debug.Log (fsm.State);
         if (WangWang.HP <= 0 || XianYu.HP <= 0)
         {
             fsm.ChangeState(States.End);
@@ -86,6 +95,7 @@ public class GameManager : Singleton<GameManager> {
 
     void Start()
     {
+		
         fsm = StateMachine<States>.Initialize(this);
         fsm.ChangeState(States.Init);
     }
@@ -171,7 +181,9 @@ public class GameManager : Singleton<GameManager> {
     void End_Enter()
     {
         UIManager.instance.playingUI.SetActive(false);
-		StartCoroutine (WaitSeconds());
+		//StartCoroutine (WaitSeconds());
 		UIManager.instance.startUI.SetActive(true);
+		//fsm = StateMachine<States>.Initialize(this);
+		//fsm.ChangeState (States.Init);
     }
 }

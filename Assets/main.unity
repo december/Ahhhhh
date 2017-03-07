@@ -805,6 +805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 575117874}
   - component: {fileID: 575117875}
+  - component: {fileID: 575117873}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -812,6 +813,86 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!82 &575117873
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 575117872}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1f03dad9877e14c629bb432132ae1a7a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &575117874
 Transform:
   m_ObjectHideFlags: 0
@@ -2122,6 +2203,9 @@ MonoBehaviour:
   ballPrefab: {fileID: 1377224059983240, guid: a7a966a93584fef48841d306d12e7e39, type: 2}
   who: 0
   thrower: {fileID: 321574320}
+  throwMusic: {fileID: 8300000, guid: cd3d1de7719414e6189203f0b05ac50a, type: 3}
+  dieMusic: {fileID: 8300000, guid: d7e36cdb171594035bde248838c0e936, type: 3}
+  hurtMusic: {fileID: 8300000, guid: 1f03dad9877e14c629bb432132ae1a7a, type: 3}
   direction: {x: 1, y: 1}
   forceMultiplier: 450
 --- !u!1 &1349573680
@@ -2189,6 +2273,9 @@ MonoBehaviour:
   ballPrefab: {fileID: 1377224059983240, guid: a7a966a93584fef48841d306d12e7e39, type: 2}
   who: 1
   thrower: {fileID: 600623276}
+  throwMusic: {fileID: 8300000, guid: 3f7e46aa0788649e786b4ff7ac8e924c, type: 3}
+  dieMusic: {fileID: 8300000, guid: 5fa5dc1a20d744330be8a0dc2b1b735d, type: 3}
+  hurtMusic: {fileID: 8300000, guid: 1f03dad9877e14c629bb432132ae1a7a, type: 3}
   direction: {x: -1, y: 1}
   forceMultiplier: 450
 --- !u!1 &1362398051
@@ -3318,7 +3405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5003c73b293984cbccba79f0886d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSum: 0.2
+  maxSum: 50
   currentVolume: 0
 --- !u!4 &2145910672
 Transform:

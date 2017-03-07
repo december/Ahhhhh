@@ -8,6 +8,7 @@ public class Stuff : MonoBehaviour {
     [SerializeField]
     //private int damage;
 	private bool hurt = false;
+	public int damage = 0;
 	//public AudioClip hurtEffect;
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -18,7 +19,9 @@ public class Stuff : MonoBehaviour {
 			if (!hurt) {
 				//GameObject
 				//AudioSource.PlayClipAtPoint (hurtEffect, other.transform.localPosition);
-				other.gameObject.GetComponent<Player> ().TakeDamage ();
+				//other.gameObject.GetComponent<Player>().
+				Debug.Log (damage);
+				other.gameObject.GetComponent<Player> ().TakeDamage (damage);
 				hurt = true;
 			}
 
